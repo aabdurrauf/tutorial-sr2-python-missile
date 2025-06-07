@@ -5,9 +5,9 @@ import threading, time, socket, random, math
 import pandas as pd
 import numpy as np
 
-from src.receiver import readPacket
+from receiver import readPacket
 from pyKey.pyKey_windows import pressKey, releaseKey
-from src.utils import relaunch, unpause_game, switch_tab
+from utils import unpause_game, switch_tab
 
 
 # konstanta
@@ -16,7 +16,6 @@ saturation = 1
 terminal_pitch_target = 60
 
 # initialization
-simulation_running = True
 flight_data_stack = []
 
 # berapa jumlah thread untku worker
@@ -26,6 +25,7 @@ rudder_worker_num = 3
 # sinkronisasi antar thread: therad yg mengeksekusi harus menunggu data masuk. 
 # saat data masuk thread observer memberi sinyal dengan men-set observation_event
 observation_event = threading.Event()
+stop_event = threading.Event()
 
 # Mutex/Lock: untuk mengunci sebuah variable supaya komunikasi antar thread mulus
 elevator_mutex = threading.Lock()
@@ -33,12 +33,17 @@ elevator_threads_communication = {f"Elevator_{i}": threading.Event() for i in ra
 rudder_mutex = threading.Lock()
 rudder_threads_communication = {f"Rudder_{i}": threading.Event() for i in range(rudder_worker_num)}
 
+# socket
+IP = "localhost"
+main_port = 2873
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.settimeout(2) # 30 seconds timeout
+sock.bind((IP, main_port))
 
 # method2 yang akan dipakai oleh threads
 def get_observation():
     print('observation thread started...\n')
-    while simulation_running:
+    while not stop_event.is_set():
         try:
             if sock and not sock._closed:
                 d, a = sock.recvfrom(2048) # 2048 maximum bit to receive
@@ -53,7 +58,7 @@ def get_observation():
     
             roll = values.get('roll')
             roll_rate = values.get('roll_rate')
-            pitch = values.get('pitch')
+            pitch = values.get('pitch') - 90 # normalize
             pitch_rate = values.get('pitch_rate')
             yaw = values.get('yaw') if values.get('yaw') <= 180 else (values.get('yaw') - 360)
             yaw_rate = values.get('yaw_rate')
@@ -76,6 +81,8 @@ def get_observation():
                                                 latitude, longitude,
                                                 target_latitude, target_longitude]), 
                                                 is_grounded])
+            
+            # print("data received:", flight_data_stack[-1])
         
             # memberi sinyal ke thread yang lain bahwa data sudah diterima dan bisa diproses
             observation_event.set()
@@ -88,7 +95,7 @@ def get_observation():
             is_grounded = True
             flight_data_stack.append([tuple([0] * 15), is_grounded])
             
-            # event set
+            # event setad
             observation_event.set()
             observation_event.clear()   
             
@@ -130,29 +137,33 @@ def elevator_control(pwm):
     elevator_mutex.release()
 
     # print(f'\n---_elevator_control---\nthread name: {thread_name}\nsaturated: {saturated}')
-            
+
 def elevator_function():
-    P = 0.009 # 0.012 # (default value)
-    D = 0.01
+    P = 0.008 # 0.012 # (default value)
+    D = 0.2
     with ThreadPoolExecutor(max_workers=elevator_worker_num, 
                             thread_name_prefix="Elevator") as elevator:
-        while simulation_running:
+        while not stop_event.is_set():
             # menunggu sinyal dari observator thread
             observation_event.wait()
             
             data = flight_data_stack[-1][0]
-            pitch = data[8]
-            pitch_rate = data[9]
-            LOS = data[12] # pitch
+            pitch = data[5]
+            pitch_rate = data[6]
+            LOS = data[9] # new pitch
             
-            lt = LOS - terminal_pitch_target
+            # lt = LOS - terminal_pitch_target
             lp = LOS - pitch
             
-            pitch_err = lt + lp
+            pitch_err = lp # + lt
             
             elevator_pwm = pitch_err * P - pitch_rate * D
+            print(f"pitch: {pitch:.2f}\t\tpitch_rate: {pitch_rate:2f}\nnew_pitch: {LOS:.2f}\telev pwm: {elevator_pwm:.2f}\tpitch_err: {pitch_err:.2f}")
             
-            elevator.submit(elevator_control, elevator_pwm)
+            try:
+                elevator.submit(elevator_control, elevator_pwm)
+            except RuntimeError as e:
+                print("ThreadPoolExecutor already shut down:", e)
     
     print('elevator thread ended')
 
@@ -232,24 +243,28 @@ def rudder_control(pwm):
     # print(f'\n---_rudder_control---\nthread name: {thread_name}\nsaturated: {saturated}\n---_rudder_control---\n')
 
 def rudder_function():
+    P = 0.0025
+    D = 0.0008
     current_time = None
     prev_time = None
     prev_target_heading = None
     with ThreadPoolExecutor(max_workers=rudder_worker_num, 
                             thread_name_prefix="Rudder") as rudder:
-        while simulation_running:
+        while not stop_event.is_set():
             # menunggu sinyal dari observator thread
             observation_event.wait()
             
             data = flight_data_stack[-1][0]
 
-            latitude = data[14]
-            longitude = data[15]
-            yaw = data[10]
+            latitude = data[11]
+            longitude = data[12]
+            yaw = data[7]
             current_pos = [latitude, longitude]
-            target_pos = [data[-2], data[-1]]
+            target_pos = [data[13], data[14]]
             
             distance_to_target = calculate_distance(current_pos, target_pos)
+
+            # print("distance to target:", distance_to_target)
             
             target_heading = calculate_target_heading(current_pos, target_pos)
             current_time = time.time()
@@ -271,9 +286,12 @@ def rudder_function():
             
             heading_error = calculate_heading_error(yaw, target_heading)
             FPA_rate = -1 * LOS_rate
-            rudder_pwm = heading_error * 0.025 + (FPA_rate + 0.000001) * 0.008
+            rudder_pwm = heading_error * P + (FPA_rate + 0.000001) * D
             
-            rudder.submit(rudder_control, rudder_pwm)
+            try:
+                rudder.submit(rudder_control, rudder_pwm)
+            except RuntimeError as e:
+                print("ThreadPoolExecutor already shut down:", e)
 
 def save_data_to_csv():
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -297,9 +315,9 @@ def save_data_to_csv():
     
 
 # 3 threads: 1. untuk menerima data, 2. untuk mengontrol pitch, 3. untuk mengontrol yaw
-observator = threading.Thread(target=get_observation, args=(), name='observator')
-pitch_contoller = threading.Thread(target=elevator_function, args=(), name='pitch_contoller')
-yaw_controller = threading.Thread(target=rudder_function, args=(), name='yaw_contoller')
+observator = threading.Thread(target=get_observation, args=(), name='observator', daemon=True)
+pitch_contoller = threading.Thread(target=elevator_function, args=(), name='pitch_contoller', daemon=True)
+yaw_controller = threading.Thread(target=rudder_function, args=(), name='yaw_contoller', daemon=True)
 
 def run():
     switch_tab()
@@ -312,13 +330,13 @@ def run():
     unpause_game()
 
     grounded = False
-    step = 0
     
-    while not grounded and step < self.max_step:
+    while not grounded:
         observation_event.wait()
         grounded = flight_data_stack[-1][1]
 
-    simulation_running = False
+    stop_event.set()
+    observation_event.set()
     print('Simulation ended')
     
 
