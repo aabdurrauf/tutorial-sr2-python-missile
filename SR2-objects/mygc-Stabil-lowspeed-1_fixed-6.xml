@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Craft name="mygc-Stabil-lowspeed-1_fixed-6" parent="c3fe754d-6cd0-4a16-a307-b5ffbf67a60e" initialBoundsMin="-0.8325186,-0.4100193,-0.6716453" initialBoundsMax="0.8325183,0.4100179,0.8883553" removeInvalidParts="true" price="6778" xmlVersion="15" activeCommandPod="88" localCenterOfMass="2.318712E-07,-0.6783555,-5.960464E-07">
+  <Assembly>
+    <Parts>
+      <Part id="78" partType="Fuselage1" position="-2.17757E-07,-6.556511E-07,-0.02164508" rotation="44.99997,89.99999,90.00002" commandPodId="88" materials="0,4,4,0,0">
+        <Drag drag="0,0.06971629,0.3003778,0.3000827,0.299489,0.299452" area="0,0.06971629,0.3864012,0.3861052,0.3928374,0.3928002" />
+        <Config heatShieldScale="0" massScale="0.05" />
+        <Fuselage bottomScale="0.15,0.15" deadWeightPercentage="0" deformations="0,0,0" depthCurve="0" offset="0,0.6500002,0" topScale="0.15,0.15" version="2" />
+        <FuelTank autoFuelType="false" capacity="126088.17699324433" fuel="126088.17699324433" fuelType="Battery" />
+      </Part>
+      <Part id="88" partType="CommandDisc1" position="-4.673515E-07,-6.556511E-07,0.6783555" rotation="90,-1.988931E-05,0" name="Command Disc" rootPart="true" commandPodId="88" materials="2,2,2,2,2" texture="Fuselage10">
+        <Drag drag="0.001015265,0,0.02273392,0.02273392,0.02411217,0.02411217" area="0.001015265,0,0.02918877,0.02918877,0.03156366,0.03156366" />
+        <Config massScale="0.1" symmetryId="ac9a0a1f-e825-45eb-8a81-d0a5196fe875" />
+        <Fuselage bottomScale="0.15,0.15" cornerRadiuses="1,1,1,1,1,1,1,1" deformations="0,0,0" depthCurve="0" offset="0,0.04999999,0" topScale="0.15,0.15" inspectorEnabled="false" partPropertiesEnabled="false" symmetryId="46db6591-323f-4b92-94a9-c3cc189d552d" version="2" />
+        <FuelTank inspectorEnabled="true" symmetryId="9b35926b-0662-45e6-a5f7-d36c91c15b08" />
+        <Gyroscope maxAcceleration="1" utilization="0" partPropertiesEnabled="false" symmetryId="588ecf6b-8720-4512-9262-17dd6dabdeab" />
+        <CommandPod activationGroupNames=",,,,,,,Landing Gear,Solar Panels,RCS" activationGroupStates="false,false,false,false,false,false,false,true,false,true" pidPitch="10,0,25" pidRoll="10,0,25" pilotSeatRotation="0,180,180" replicateActivationGroups="All" stageCalculationVersion="2" symmetryId="4ea0c69e-eeec-4e1f-bc0b-333c2be2981e">
+          <Controls />
+        </CommandPod>
+        <FlightProgram powerConsumptionPerInstruction="0.01" broadcastPowerConsumptionPerByte="0.1">
+          <Program name="pitch1">
+            <Variables>
+              <Variable name="TargetPosition" number="-0" />
+              <Variable name="DirectionPosition" number="-0" />
+              <Variable name="RollAngle" number="-0" />
+              <Variable name="DirectionTarget" number="-0" />
+              <Variable name="ErrorAngle" number="-0" />
+              <Variable name="DirectionAngle" number="-0" />
+              <Variable name="roll_RL_target" number="-0" />
+              <Variable name="x1" number="0" />
+              <Variable name="x2" number="0" />
+              <Variable name="v1" number="0" />
+              <Variable name="v2" number="0" />
+              <Variable name="x3" number="0" />
+              <Variable name="t1" number="0" />
+              <Variable name="aimpoint" number="0" />
+              <Variable name="v3" number="0" />
+              <Variable name="x4" number="0" />
+              <Variable name="lastposition" number="-0" />
+              <Variable name="currentposition" number="-0" />
+              <Variable name="deltax" number="-0" />
+              <Variable name="deltaz" number="-0" />
+              <Variable name="x" number="-0" />
+              <Variable name="z" number="-0" />
+              <Variable name="partID" number="-0" />
+              <Variable name="deltaposition" number="-0" />
+              <Variable name="target" number="-0" />
+              <Variable name="crafts">
+                <Items />
+              </Variable>
+              <Variable name="k" number="-0" />
+              <Variable name="lastTime" number="-0" />
+              <Variable name="deltaTime" number="-0" />
+              <Variable name="kx" number="0" />
+              <Variable name="kz" number="0" />
+            </Variables>
+            <Instructions>
+              <SetInput input="throttle" id="0" style="set-input" pos="-691.1173,-559.1568">
+                <Constant number="0" />
+              </SetInput>
+            </Instructions>
+            <Instructions>
+              <While id="1" style="while" pos="-644.1173,-627.1568">
+                <Constant style="true" bool="true" />
+                <Instructions>
+                  <DisplayMessage id="2" style="display">
+                    <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                    <Constant number="7" />
+                  </DisplayMessage>
+                  <DisplayMessage id="3" style="display">
+                    <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                    <Constant number="7" />
+                  </DisplayMessage>
+                  <SetInput input="roll" id="4" style="set-input">
+                    <BinaryOp op="-" style="op-sub">
+                      <Constant number="0" />
+                      <BinaryOp op="/" style="op-div">
+                        <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                        <Constant text="90" />
+                      </BinaryOp>
+                    </BinaryOp>
+                  </SetInput>
+                  <SetInput input="pitch" id="5" style="set-input">
+                    <BinaryOp op="*" style="op-mul">
+                      <BinaryOp op="-" style="op-sub">
+                        <Constant number="0" />
+                        <BinaryOp op="/" style="op-div">
+                          <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                          <Constant text="90" />
+                        </BinaryOp>
+                      </BinaryOp>
+                      <Constant text="-1" />
+                    </BinaryOp>
+                  </SetInput>
+                </Instructions>
+              </While>
+            </Instructions>
+            <Instructions>
+              <Event event="FlightStart" id="6" style="flight-start" pos="-419.1173,-83.1568" />
+            </Instructions>
+            <Instructions>
+              <While id="7" style="while" pos="-79.11731,-85.1568">
+                <Constant style="true" bool="true" />
+                <Instructions>
+                  <DisplayMessage id="8" style="display">
+                    <BinaryOp op="-" style="op-sub">
+                      <Constant text="270" />
+                      <CraftProperty property="Nav.CraftHeading" style="prop-nav" />
+                    </BinaryOp>
+                    <Constant number="7" />
+                  </DisplayMessage>
+                  <If id="9" style="if">
+                    <Comparison op="l" style="op-lt">
+                      <CraftProperty property="Input.Throttle" style="prop-input" />
+                      <Constant text="0.5" />
+                    </Comparison>
+                    <Instructions>
+                      <SetInput input="roll" id="10" style="set-input">
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="-" style="op-sub">
+                            <BinaryOp op="*" style="op-mul">
+                              <BinaryOp op="/" style="op-div">
+                                <BinaryOp op="-" style="op-sub">
+                                  <Constant text="270" />
+                                  <CraftProperty property="Nav.CraftHeading" style="prop-nav" />
+                                </BinaryOp>
+                                <Constant text="360" />
+                              </BinaryOp>
+                              <Constant text="2" />
+                            </BinaryOp>
+                            <BinaryOp op="*" style="op-mul">
+                              <BinaryOp op="/" style="op-div">
+                                <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                                <Constant text="90" />
+                              </BinaryOp>
+                              <Constant text="1" />
+                            </BinaryOp>
+                          </BinaryOp>
+                          <BinaryOp op="/" style="op-div">
+                            <VectorOp op="y" style="vec-op-1">
+                              <BinaryOp op="*" style="op-mul">
+                                <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                                <Constant text="57.3" />
+                              </BinaryOp>
+                            </VectorOp>
+                            <Constant text="-35" />
+                          </BinaryOp>
+                        </BinaryOp>
+                      </SetInput>
+                      <SetInput input="pitch" id="11" style="set-input">
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="*" style="op-mul">
+                            <BinaryOp op="-" style="op-sub">
+                              <Constant number="0" />
+                              <BinaryOp op="/" style="op-div">
+                                <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                                <Constant text="90" />
+                              </BinaryOp>
+                            </BinaryOp>
+                            <Constant text="-1" />
+                          </BinaryOp>
+                          <BinaryOp op="/" style="op-div">
+                            <VectorOp op="y" style="vec-op-1">
+                              <BinaryOp op="*" style="op-mul">
+                                <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                                <Constant text="57.3" />
+                              </BinaryOp>
+                            </VectorOp>
+                            <Constant text="-35" />
+                          </BinaryOp>
+                        </BinaryOp>
+                      </SetInput>
+                      <SetInput input="yaw" id="12" style="set-input">
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="/" style="op-div">
+                            <BinaryOp op="-" style="op-sub">
+                              <Constant text="270" />
+                              <CraftProperty property="Nav.CraftHeading" style="prop-nav" />
+                            </BinaryOp>
+                            <Constant text="360" />
+                          </BinaryOp>
+                          <BinaryOp op="*" style="op-mul">
+                            <VectorOp op="y" style="vec-op-1">
+                              <BinaryOp op="*" style="op-mul">
+                                <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                                <Constant text="57.3" />
+                              </BinaryOp>
+                            </VectorOp>
+                            <Constant text="0" />
+                          </BinaryOp>
+                        </BinaryOp>
+                      </SetInput>
+                    </Instructions>
+                  </If>
+                  <ElseIf id="13" style="else">
+                    <Constant bool="true" />
+                    <Instructions>
+                      <SetInput input="roll" id="14" style="set-input">
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="-" style="op-sub">
+                            <Constant number="0" />
+                            <BinaryOp op="*" style="op-mul">
+                              <BinaryOp op="/" style="op-div">
+                                <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                                <Constant text="90" />
+                              </BinaryOp>
+                              <Constant text="2.5" />
+                            </BinaryOp>
+                          </BinaryOp>
+                          <Constant text="0" />
+                        </BinaryOp>
+                      </SetInput>
+                      <SetInput input="pitch" id="15" style="set-input">
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="*" style="op-mul">
+                            <BinaryOp op="-" style="op-sub">
+                              <Constant number="0" />
+                              <BinaryOp op="/" style="op-div">
+                                <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                                <Constant text="90" />
+                              </BinaryOp>
+                            </BinaryOp>
+                            <Constant text="-8" />
+                          </BinaryOp>
+                          <Constant text="0" />
+                        </BinaryOp>
+                      </SetInput>
+                    </Instructions>
+                  </ElseIf>
+                </Instructions>
+              </While>
+            </Instructions>
+            <Expressions>
+              <Constant pos="-919.4725,-616.4115" text="" />
+              <BinaryOp op="*" style="op-mul" pos="-1286.326,-788.1568">
+                <BinaryOp op="-" style="op-sub">
+                  <Constant number="0" />
+                  <BinaryOp op="/" style="op-div">
+                    <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                    <Constant text="90" />
+                  </BinaryOp>
+                </BinaryOp>
+                <Constant text="1" />
+              </BinaryOp>
+              <BinaryOp op="+" style="op-add" pos="100.5455,-819.1568">
+                <Constant text="-.7" />
+                <BinaryOp op="*" style="op-mul">
+                  <Constant text="1.1" />
+                  <BinaryOp op="/" style="op-div">
+                    <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                    <Constant text="90" />
+                  </BinaryOp>
+                </BinaryOp>
+              </BinaryOp>
+              <BinaryOp op="*" style="op-mul" pos="96.54541,-747.1568">
+                <Constant text="4" />
+                <BinaryOp op="/" style="op-div">
+                  <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                  <Constant text="90" />
+                </BinaryOp>
+              </BinaryOp>
+            </Expressions>
+          </Program>
+        </FlightProgram>
+      </Part>
+      <Part id="93" partType="Fin1" position="0.1500617,4.268435E-05,-0.5216449" rotation="1.39321E-05,-2.216913E-05,270" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0,0.0001035171,0.0428509,0.0428509,0,0.0005941411" area="0,0.003299611,0.0428953,0.0428953,0,0.0005941411" />
+        <Config centerOfMass="-3.108624E-14,0.315,2.713046E-08" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" symmetryId="1c5e9c60-6a32-4048-9b60-e04126cdb1be" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.21" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.02" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.63,-0.21" tipTrailingOffset="0" symmetryId="a6038845-31c2-4cfe-b9a0-3ccb06733981" version="2" />
+        <ControlSurface end="1" singleAxisWhenAuto="false" symmetryId="4e7dbc7e-ec45-41ab-89ca-23e51ec1d22a" />
+      </Part>
+      <Part id="102" partType="Fin1" position="0.1500183,-8.95947E-07,0.07835504" rotation="1.676119E-05,-1.704652E-05,269.9999" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0.0007806905,0.0001751831,0.182353,0.1823532,0,0.002079494" area="0.00888355,0.005583952,0.1825421,0.1825421,0,0.002079494" />
+        <Config centerOfMass="-7.313999E-10,0.52762,0.002499994" heatShieldScale="0" massScale="0.1" partScale="0.65,0.65,0.65" symmetryId="52f2388a-d281-4331-874e-6c00b9cd607b" />
+        <Wing airfoil="Fin" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.2" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.020487804" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,1.05,-0.21" tipTrailingOffset="-0" symmetryId="f094d43a-dcf6-4b7a-a632-dec15d85f6fb" version="2" />
+      </Part>
+      <Part id="105" partType="NoseCone1" position="-4.980852E-07,-6.556511E-07,0.8083552" rotation="90,-7.670739E-06,0" name="Hemisphere" commandPodId="88" materials="0,4,4,0,0" style="NoseCone-Round-2">
+        <Drag drag="0.04458939,0,0.02520876,0.02520909,0.02441993,0.02441978" area="0.06870098,0,0.03790338,0.03790338,0.03691091,0.03691091" />
+        <AttachPoints>
+          <AttachPoint id="0" position="0,0,0" rotation="0,0,0" scale="1" positionOffset="0,0,0" rotationOffset="0,0,0" enabled="true" ignoreSurfaces="false" allowRotation="false" jointType="Fused" connectionType="Normal" crewTraversable="false" />
+        </AttachPoints>
+        <Config centerOfMass="-3.836935E-15,-0.03200003,-9.663389E-16" heatShieldScale="0" massScale="0" />
+        <Fuselage bottomScale="0.15,0.15" deadWeightPercentage="0" deformations="0,0,0" depthCurve="0" meshMassMultiplier="1.5" offset="5.995204E-14,0.08000008,1.509903E-14" topScale="0,0" version="2" />
+        <FuelTank capacity="2.073453426361084" fuelType="None" />
+      </Part>
+      <Part id="109" partType="Fin1" position="-4.324765E-05,0.1500611,-0.5216451" rotation="1.711369E-05,-2.390566E-05,3.073584E-05" commandPodId="88" materials="0,1,0,0,1" mirrored="true">
+        <Drag drag="0,0.0001035171,0.0005076322,0,0.04107127,0.04107141" area="0,0.003299611,0.0005076322,0,0.04110702,0.04110702" />
+        <Config centerOfMass="4.174439E-12,0.3150001,5.492424E-08" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" symmetryId="38810c21-85b5-42ee-8478-b0bb0be9df84" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.21" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.02" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.63,-0.21" tipTrailingOffset="0" symmetryId="2f48c79a-0e66-443a-85e9-32e422dd8d3f" version="2" />
+        <ControlSurface end="1" input="Yaw" invert="true" symmetryId="81eb3d16-9d55-426a-a592-7906742945a1" />
+      </Part>
+      <Part id="112" partType="Fin1" position="-0.1500185,8.568355E-05,-0.5216452" rotation="1.626139E-05,-1.200516E-05,90.00002" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0,0.0001035171,0.0428509,0.0428509,0.0005570073,0" area="0,0.003299611,0.0428953,0.0428953,0.0005570073,0" />
+        <Config centerOfMass="0,0.315,6.600187E-08" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.21" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.02" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.63,-0.21" tipTrailingOffset="0" version="2" />
+        <ControlSurface end="1" singleAxisWhenAuto="false" />
+      </Part>
+      <Part id="113" partType="Fin1" position="-0.1500188,-7.767521E-07,0.07835475" rotation="-9.516692E-06,-4.972335E-06,90.00017" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0.0007806905,0.0001751831,0.1823534,0.1823529,0.002079494,0" area="0.00888355,0.005583952,0.1825421,0.1825421,0.002079494,0" />
+        <Config centerOfMass="-4.150444E-10,0.5276199,0.002500002" heatShieldScale="0" massScale="0.1" partScale="0.65,0.65,0.65" symmetryId="86e2c3a6-30e1-496d-aee4-797b92407a7f" />
+        <Wing airfoil="Fin" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.2" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.020487804" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,1.05,-0.21" tipTrailingOffset="-0" symmetryId="bad39080-a796-4746-9c2f-a62745469fcc" version="2" />
+      </Part>
+      <Part id="114" partType="Fin1" position="4.32424E-05,-0.1500622,-0.5216451" rotation="1.625379E-05,-2.557283E-05,180" commandPodId="88" materials="0,1,0,0,1" mirrored="true">
+        <Drag drag="0,0.0001035171,0,0.0005076322,0.04107141,0.04107127" area="0,0.003299611,0,0.0005076322,0.04110702,0.04110702" />
+        <Config centerOfMass="-1.261213E-12,0.315,-5.965176E-08" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.21" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.02" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.63,-0.21" tipTrailingOffset="0" version="2" />
+        <ControlSurface end="1" input="Yaw" />
+      </Part>
+      <Part id="115" partType="OrangeBlackBox" position="-4.329794E-05,0.1751111,-0.4216452" rotation="-2.049057E-05,180,180" activationGroup="2" commandPodId="88" materials="0,1,2,3,4">
+        <Drag drag="0,0,0,0,0,0" area="0,0,0,0,0,0" />
+        <Config buoyancyUserScale="0" castShadows="false" collisionPreventExternalDisconnections="false" dragScale="0" dragScaleActive="1" dragScaleAngular="1" explosiveness="-1" heatShieldBaseScale="1" heatShieldMass="0" heatShieldScale="-1" heatShieldValidation="true" ignoreValidation="false" includeInDrag="false" initialCraftNodeId="-1" massScale="0" maxDrag="0" maxDragActive="0" maxTemperature="0" occlusion="Auto" partScale="0.05,0.05,0.05" partSelectionEnabled="true" preventDebris="false" priceScale="0" renderQueue="Default" supportsTransparency="false" staticPriceAndMass="false" version="1" versionLast="1" />
+        <FlightProgram timeSinceLaunch="0" powerConsumptionPerInstruction="0" broadcastPowerConsumptionPerByte="0" staticPriceAndMass="false" version="1" versionLast="1">
+          <Program name="missile_target_BRIN">
+            <Variables>
+              <Variable name="log_sample_num" number="0" />
+              <Variable name="LogFrequency" number="0" />
+              <Variable name="log_velocity" number="0" />
+              <Variable name="log_pitch" number="0" />
+              <Variable name="log_pitch_rate" number="0" />
+              <Variable name="log_yaw" number="0" />
+              <Variable name="log_yaw_rate" number="0" />
+              <Variable name="log_grounded" number="0" />
+              <Variable name="log_destroyed" number="0" />
+              <Variable name="log_cross_product" number="0" />
+              <Variable name="log_velocity_vector" number="0" />
+              <Variable name="log_target_position" number="0" />
+              <Variable name="target" number="0" />
+              <Variable name="crafts">
+                <Items />
+              </Variable>
+              <Variable name="lastPosition" number="0" />
+              <Variable name="currentPosition" number="0" />
+              <Variable name="active_aircraft_centered_target_position_vector" number="0" />
+              <Variable name="north_unit_vector" number="0" />
+              <Variable name="east_unit_vector" number="0" />
+              <Variable name="up_unit_vector" number="0" />
+              <Variable name="north_mag" number="0" />
+              <Variable name="east_mag" number="0" />
+              <Variable name="up_mag" number="0" />
+              <Variable name="NEU_target_position_vector" number="0" />
+              <Variable name="new_heading" number="0" />
+              <Variable name="new_pitch" number="0" />
+              <Variable name="log_new_pitch" number="0" />
+              <Variable name="log_position" number="0" />
+              <Variable name="RcrossVnorm" number="0" />
+              <Variable name="log_RcrossVnorm_x" number="0" />
+              <Variable name="log_RcrossVnorm_y" number="0" />
+              <Variable name="log_new_yaw" number="0" />
+              <Variable name="log_distance_to_target" number="0" />
+              <Variable name="log_agl" number="0" />
+              <Variable name="log_roll" number="0" />
+              <Variable name="log_roll_rate" number="0" />
+              <Variable name="log_pos_x" number="0" />
+              <Variable name="log_pos_y" number="0" />
+              <Variable name="log_pos_z" number="0" />
+              <Variable name="log_ver_vel" number="0" />
+              <Variable name="log_north_unit_vec" number="0" />
+              <Variable name="log_east_unit_vec" number="0" />
+              <Variable name="log_up_unit_vec" number="0" />
+              <Variable name="log_latitude" number="0" />
+              <Variable name="log_longitude" number="0" />
+              <Variable name="log_target_long" number="0" />
+              <Variable name="log_target_lat" number="0" />
+              <Variable name="log_target_pos_x" number="0" />
+              <Variable name="log_target_pos_y" number="0" />
+              <Variable name="log_target_pos_z" number="0" />
+              <Variable name="AircraftName" number="0" />
+            </Variables>
+            <Instructions>
+              <Event event="FlightStart" id="0" style="flight-start" pos="1807.422,-81.30611" />
+              <While id="1" style="while">
+                <Constant style="true" bool="true" />
+                <Instructions>
+                  <SetVariable id="2" style="set-variable">
+                    <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                    <BinaryOp op="-" style="op-sub">
+                      <CraftProperty property="Target.Position" style="prop-nav" />
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </BinaryOp>
+                  </SetVariable>
+                  <SetVariable id="3" style="set-variable">
+                    <Variable list="false" local="false" variableName="north_unit_vector" />
+                    <CraftProperty property="Nav.North" style="prop-nav" />
+                  </SetVariable>
+                  <SetVariable id="4" style="set-variable">
+                    <Variable list="false" local="false" variableName="east_unit_vector" />
+                    <CraftProperty property="Nav.East" style="prop-nav" />
+                  </SetVariable>
+                  <SetVariable id="5" style="set-variable">
+                    <Variable list="false" local="false" variableName="up_unit_vector" />
+                    <VectorOp op="norm" style="vec-op-1">
+                      <BinaryOp op="*" style="op-mul">
+                        <CraftProperty property="Vel.Gravity" style="prop-velocity" />
+                        <Constant text="-1" />
+                      </BinaryOp>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="6" style="set-variable">
+                    <Variable list="false" local="false" variableName="north_mag" />
+                    <VectorOp op="dot" style="vec-op-2">
+                      <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                      <Variable list="false" local="false" variableName="north_unit_vector" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="7" style="set-variable">
+                    <Variable list="false" local="false" variableName="east_mag" />
+                    <VectorOp op="dot" style="vec-op-2">
+                      <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                      <Variable list="false" local="false" variableName="east_unit_vector" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="8" style="set-variable">
+                    <Variable list="false" local="false" variableName="up_mag" />
+                    <VectorOp op="dot" style="vec-op-2">
+                      <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                      <Variable list="false" local="false" variableName="up_unit_vector" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="9" style="set-variable">
+                    <Variable list="false" local="false" variableName="NEU_target_position_vector" />
+                    <BinaryOp op="+" style="op-add">
+                      <BinaryOp op="+" style="op-add">
+                        <BinaryOp op="*" style="op-mul">
+                          <Variable list="false" local="false" variableName="north_mag" />
+                          <Vector style="vec">
+                            <Constant text="1" />
+                            <Constant number="0" />
+                            <Constant number="0" />
+                          </Vector>
+                        </BinaryOp>
+                        <BinaryOp op="*" style="op-mul">
+                          <Variable list="false" local="false" variableName="east_mag" />
+                          <Vector style="vec">
+                            <Constant number="0" />
+                            <Constant text="1" />
+                            <Constant number="0" />
+                          </Vector>
+                        </BinaryOp>
+                      </BinaryOp>
+                      <BinaryOp op="*" style="op-mul">
+                        <Variable list="false" local="false" variableName="up_mag" />
+                        <Vector style="vec">
+                          <Constant number="0" />
+                          <Constant number="0" />
+                          <Constant text="1" />
+                        </Vector>
+                      </BinaryOp>
+                    </BinaryOp>
+                  </SetVariable>
+                  <SetVariable id="10" style="set-variable">
+                    <Variable list="false" local="false" variableName="new_heading" />
+                    <MathFunction function="rad2deg" style="op-math">
+                      <BinaryOp op="atan2" style="op-atan-2">
+                        <Variable list="false" local="false" variableName="east_mag" />
+                        <Variable list="false" local="false" variableName="north_mag" />
+                      </BinaryOp>
+                    </MathFunction>
+                  </SetVariable>
+                  <Comment id="11" style="comment">
+                    <Constant style="comment-text" canReplace="false" text="New Pitch will always be negative number" />
+                  </Comment>
+                  <SetVariable id="12" style="set-variable">
+                    <Variable list="false" local="false" variableName="new_pitch" />
+                    <BinaryOp op="-" style="op-sub">
+                      <Constant text="90" />
+                      <VectorOp op="angle" style="vec-op-2">
+                        <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                        <Variable list="false" local="false" variableName="up_unit_vector" />
+                      </VectorOp>
+                    </BinaryOp>
+                  </SetVariable>
+                  <SetVariable id="13" style="set-variable">
+                    <Variable list="false" local="false" variableName="RcrossVnorm" />
+                    <VectorOp op="cross" style="vec-op-2">
+                      <VectorOp op="norm" style="vec-op-1">
+                        <BinaryOp op="-" style="op-sub">
+                          <CraftProperty property="Target.Position" style="prop-nav" />
+                          <CraftProperty property="Nav.Position" style="prop-nav" />
+                        </BinaryOp>
+                      </VectorOp>
+                      <VectorOp op="norm" style="vec-op-1">
+                        <BinaryOp op="-" style="op-sub">
+                          <CraftProperty property="Target.Velocity" style="prop-velocity" />
+                          <CraftProperty property="Vel.SurfaceVelocity" style="prop-velocity" />
+                        </BinaryOp>
+                      </VectorOp>
+                    </VectorOp>
+                  </SetVariable>
+                </Instructions>
+              </While>
+            </Instructions>
+            <Instructions>
+              <Comment id="14" style="comment" pos="1125.236,-405.1091">
+                <Constant style="comment-text" canReplace="false" text="Line of Sight (Lambda)" />
+              </Comment>
+            </Instructions>
+            <Instructions>
+              <DisplayMessage id="15" style="display" pos="1790.12,-977.485">
+                <StringOp op="join" style="join">
+                  <Constant text="East mag: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n2} " />
+                    <Variable list="false" local="false" variableName="east_unit_vector" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="North mag: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n2}" />
+                    <Variable list="false" local="false" variableName="north_unit_vector" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+            </Instructions>
+            <Instructions>
+              <Event event="FlightStart" id="16" style="flight-start" pos="1121.57,-20.75711" />
+              <WaitSeconds id="17" style="wait-seconds">
+                <Constant text="0.2" />
+              </WaitSeconds>
+              <Comment id="18" style="comment">
+                <Constant style="comment-text" canReplace="false" text="Set Target Thread" />
+              </Comment>
+              <SetVariable id="19" style="list-init">
+                <Variable list="true" local="false" variableName="crafts" />
+                <Planet op="craftids" style="planet">
+                  <CraftProperty property="Orbit.Planet" style="prop-name" />
+                </Planet>
+              </SetVariable>
+              <SetVariable id="20" style="set-variable">
+                <Variable list="false" local="false" variableName="target" />
+                <ListOp op="get" style="list-get">
+                  <Variable list="true" local="false" variableName="crafts" />
+                  <Constant text="1" />
+                </ListOp>
+              </SetVariable>
+              <SetTarget id="21" style="set-target">
+                <CraftProperty property="Craft.IDToName" style="craft">
+                  <Variable list="false" local="false" variableName="target" />
+                </CraftProperty>
+              </SetTarget>
+            </Instructions>
+            <Instructions>
+              <Event event="FlightStart" id="22" style="flight-start" pos="-87.23888,681.6128" />
+              <SetActivationGroup id="23" style="set-ag">
+                <Constant text="2" />
+                <Constant style="true" bool="true" />
+              </SetActivationGroup>
+              <Comment id="24" style="comment">
+                <Constant style="comment-text" canReplace="false" text="LogFrequency = 4Hz" />
+              </Comment>
+              <Comment id="25" style="comment">
+                <Constant style="comment-text" canReplace="false" text="LogFrequency is the number of samples per second to be send" />
+              </Comment>
+              <SetVariable id="26" style="set-variable">
+                <Variable list="false" local="false" variableName="LogFrequency" />
+                <Constant text="5" />
+              </SetVariable>
+              <SetVariable id="27" style="set-variable">
+                <Variable list="false" local="false" variableName="log_sample_num" />
+                <Constant text="1" />
+              </SetVariable>
+              <SetVariable id="28" style="set-variable">
+                <Variable list="false" local="false" variableName="AircraftName" />
+                <Constant text="mygc-Stabil-lowspeed-1_fixed-6" />
+              </SetVariable>
+              <While id="29" style="while">
+                <Constant style="true" bool="true" />
+                <Instructions>
+                  <ChangeVariable id="30" style="change-variable">
+                    <Variable list="false" local="false" variableName="log_sample_num" />
+                    <Constant text="1" />
+                  </ChangeVariable>
+                  <Comment id="31" style="comment">
+                    <Constant style="comment-text" canReplace="false" text="velocity in m/s" />
+                  </Comment>
+                  <SetVariable id="32" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_velocity" />
+                    <BinaryOp op="*" style="op-mul">
+                      <CraftProperty property="Vel.MachNumber" style="prop-velocity" />
+                      <Constant text="343" />
+                    </BinaryOp>
+                  </SetVariable>
+                  <SetVariable id="33" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_ver_vel" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <CraftProperty property="Vel.SurfaceVelocity" style="prop-velocity" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="34" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_agl" />
+                    <VectorOp op="z" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Craft.Position" style="craft">
+                          <CraftProperty property="Craft.NameToID" style="craft-id">
+                            <Variable list="false" local="false" variableName="AircraftName" />
+                          </CraftProperty>
+                        </CraftProperty>
+                      </Planet>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="35" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_roll" />
+                    <CraftProperty property="Nav.BankAngle" style="prop-nav" />
+                  </SetVariable>
+                  <SetVariable id="36" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_roll_rate" />
+                    <VectorOp op="z" style="vec-op-1">
+                      <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="37" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_pitch" />
+                    <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                  </SetVariable>
+                  <SetVariable id="38" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_new_pitch" />
+                    <Variable list="false" local="false" variableName="new_pitch" />
+                  </SetVariable>
+                  <SetVariable id="39" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_pitch_rate" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="40" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_yaw" />
+                    <CraftProperty property="Nav.CraftHeading" style="prop-nav" />
+                  </SetVariable>
+                  <SetVariable id="41" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_new_yaw" />
+                    <Variable list="false" local="false" variableName="new_heading" />
+                  </SetVariable>
+                  <SetVariable id="42" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_yaw_rate" />
+                    <VectorOp op="y" style="vec-op-1">
+                      <CraftProperty property="Vel.AngularVelocity" style="prop-velocity" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="43" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_grounded" />
+                    <CraftProperty property="Craft.Grounded" style="craft">
+                      <CraftProperty property="Craft.NameToID" style="craft-id">
+                        <Variable list="false" local="false" variableName="AircraftName" />
+                      </CraftProperty>
+                    </CraftProperty>
+                  </SetVariable>
+                  <SetVariable id="44" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_destroyed" />
+                    <CraftProperty property="Craft.Destroyed" style="craft">
+                      <CraftProperty property="Craft.NameToID" style="craft-id">
+                        <Variable list="false" local="false" variableName="AircraftName" />
+                      </CraftProperty>
+                    </CraftProperty>
+                  </SetVariable>
+                  <SetVariable id="45" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_velocity_vector" />
+                    <CraftProperty property="Craft.Velocity" style="craft">
+                      <CraftProperty property="Craft.NameToID" style="craft-id">
+                        <Variable list="false" local="false" variableName="AircraftName" />
+                      </CraftProperty>
+                    </CraftProperty>
+                  </SetVariable>
+                  <SetVariable id="46" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_position" />
+                    <CraftProperty property="Nav.Position" style="prop-nav" />
+                  </SetVariable>
+                  <Comment id="47" style="comment">
+                    <Constant style="comment-text" canReplace="false" text="distance to target (surface) | x coordinate is the altitude of the craft" />
+                  </Comment>
+                  <SetVariable id="48" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_pos_x" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="49" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_pos_y" />
+                    <VectorOp op="y" style="vec-op-1">
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="50" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_pos_z" />
+                    <VectorOp op="z" style="vec-op-1">
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <Comment id="51" style="comment">
+                    <Constant style="comment-text" canReplace="false" text="target xyz coordinate" />
+                  </Comment>
+                  <SetVariable id="52" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_target_pos_x" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <CraftProperty property="Target.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="53" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_target_pos_y" />
+                    <VectorOp op="y" style="vec-op-1">
+                      <CraftProperty property="Target.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="54" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_target_pos_z" />
+                    <VectorOp op="z" style="vec-op-1">
+                      <CraftProperty property="Target.Position" style="prop-nav" />
+                    </VectorOp>
+                  </SetVariable>
+                  <Comment id="55" style="comment">
+                    <Constant style="comment-text" canReplace="false" text="unit vectors" />
+                  </Comment>
+                  <SetVariable id="56" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_north_unit_vec" />
+                    <Variable list="false" local="false" variableName="north_unit_vector" />
+                  </SetVariable>
+                  <SetVariable id="57" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_east_unit_vec" />
+                    <Variable list="false" local="false" variableName="east_unit_vector" />
+                  </SetVariable>
+                  <SetVariable id="58" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_up_unit_vec" />
+                    <Variable list="false" local="false" variableName="up_unit_vector" />
+                  </SetVariable>
+                  <SetVariable id="59" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_latitude" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Nav.Position" style="prop-nav" />
+                      </Planet>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="60" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_longitude" />
+                    <VectorOp op="y" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Nav.Position" style="prop-nav" />
+                      </Planet>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="61" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_target_lat" />
+                    <VectorOp op="x" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Target.Position" style="prop-nav" />
+                      </Planet>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="62" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_target_long" />
+                    <VectorOp op="y" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Target.Position" style="prop-nav" />
+                      </Planet>
+                    </VectorOp>
+                  </SetVariable>
+                  <SetVariable id="63" style="set-variable">
+                    <Variable list="false" local="false" variableName="log_distance_to_target" />
+                    <MathFunction function="sqrt" style="op-math">
+                      <BinaryOp op="+" style="op-add">
+                        <BinaryOp op="^" style="op-exp">
+                          <VectorOp op="x" style="vec-op-1">
+                            <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                          </VectorOp>
+                          <Constant text="2" />
+                        </BinaryOp>
+                        <BinaryOp op="+" style="op-add">
+                          <BinaryOp op="^" style="op-exp">
+                            <VectorOp op="y" style="vec-op-1">
+                              <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                            </VectorOp>
+                            <Constant text="2" />
+                          </BinaryOp>
+                          <BinaryOp op="^" style="op-exp">
+                            <VectorOp op="z" style="vec-op-1">
+                              <Variable list="false" local="false" variableName="active_aircraft_centered_target_position_vector" />
+                            </VectorOp>
+                            <Constant text="2" />
+                          </BinaryOp>
+                        </BinaryOp>
+                      </BinaryOp>
+                    </MathFunction>
+                  </SetVariable>
+                </Instructions>
+              </While>
+            </Instructions>
+            <Instructions>
+              <DisplayMessage id="64" style="display" pos="-184.9736,-1272.753">
+                <StringOp op="join" style="join">
+                  <Constant text="lat/long/agl: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="({0:n0}) " />
+                    <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </Planet>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="65" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="lat/long/agl: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="({0:n0}) " />
+                    <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                      <CraftProperty property="Nav.Position" style="prop-nav" />
+                    </Planet>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="66" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="velocity surface X: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="({0:n0}; " />
+                    <Variable list="false" local="false" variableName="log_ver_vel" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="67" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="Pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <StringOp op="join" style="join">
+                    <Constant text="Target Position - Position:" />
+                    <StringOp op="join" style="join">
+                      <StringOp op="format" style="format">
+                        <Constant text="({0:n2}; " />
+                        <CallCustomExpression call="get target vector x" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <StringOp op="format" style="format">
+                        <Constant text="{0:n2}; " />
+                        <CallCustomExpression call="get target vector y" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <StringOp op="format" style="format">
+                        <Constant text="{0:n2})" />
+                        <CallCustomExpression call="get target vector z" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="craft_pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <Variable list="false" local="false" variableName="log_pitch" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="new_pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <Variable list="false" local="false" variableName="new_pitch" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="diff_pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <BinaryOp op="-" style="op-sub">
+                      <Variable list="false" local="false" variableName="log_pitch" />
+                      <Variable list="false" local="false" variableName="new_pitch" />
+                    </BinaryOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="68" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="velocity mach: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n4}" />
+                    <BinaryOp op="*" style="op-mul">
+                      <CraftProperty property="Vel.MachNumber" style="prop-velocity" />
+                      <Constant text="343" />
+                    </BinaryOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text=" m/s" />
+                  <Constant text="&lt;br&gt;" />
+                  <StringOp op="join" style="join">
+                    <Constant text="velocity surface: " />
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n4}" />
+                      <CraftProperty property="Vel.SurfaceVelocity" style="prop-velocity" />
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text=" m/s" />
+                    <Constant text="&lt;br&gt;" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <Comment id="69" style="comment">
+                <Constant style="comment-text" canReplace="false" text="mach velocity * 343 equals craft velocity in m/s" />
+              </Comment>
+              <DisplayMessage id="70" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="agl:" />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n4}" />
+                    <VectorOp op="z" style="vec-op-1">
+                      <Planet op="toLatLongAgl" style="planet-to-lat-long-agl">
+                        <CraftProperty property="Craft.Position" style="craft">
+                          <CraftProperty property="Craft.NameToID" style="craft-id">
+                            <Variable list="false" local="false" variableName="AircraftName" />
+                          </CraftProperty>
+                        </CraftProperty>
+                      </Planet>
+                    </VectorOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text=" m" />
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="71" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="Pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <CraftProperty property="Nav.Pitch" style="prop-nav" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <StringOp op="join" style="join">
+                    <Constant text="Target Position - Position:" />
+                    <StringOp op="join" style="join">
+                      <StringOp op="format" style="format">
+                        <Constant text="({0:n2}; " />
+                        <CallCustomExpression call="get target vector x" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <StringOp op="format" style="format">
+                        <Constant text="{0:n2}; " />
+                        <CallCustomExpression call="get target vector y" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <StringOp op="format" style="format">
+                        <Constant text="{0:n2})" />
+                        <CallCustomExpression call="get target vector z" style="call-custom-expression" />
+                        <Constant text="" />
+                      </StringOp>
+                      <StringOp op="join" style="join">
+                        <Constant text="&lt;br&gt;" />
+                        <Constant text="Target Name: " />
+                        <CraftProperty property="Craft.IDToName" style="craft">
+                          <Variable list="false" local="false" variableName="target" />
+                        </CraftProperty>
+                        <Constant text="" />
+                      </StringOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="NEU_target_pos_vec: " />
+                  <StringOp op="join" style="join">
+                    <StringOp op="format" style="format">
+                      <Constant text="({0:n0}; " />
+                      <VectorOp op="x" style="vec-op-1">
+                        <Variable list="false" local="false" variableName="NEU_target_position_vector" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0}; " />
+                      <VectorOp op="y" style="vec-op-1">
+                        <Variable list="false" local="false" variableName="NEU_target_position_vector" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0})" />
+                      <VectorOp op="z" style="vec-op-1">
+                        <Variable list="false" local="false" variableName="NEU_target_position_vector" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="Heading: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <Variable list="false" local="false" variableName="new_heading" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="&lt;br&gt;" />
+                  <Constant text="Pitch: " />
+                  <StringOp op="format" style="format">
+                    <Constant text="{0:n1}" />
+                    <Variable list="false" local="false" variableName="new_pitch" />
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="72" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="Target Position:" />
+                  <StringOp op="join" style="join">
+                    <StringOp op="format" style="format">
+                      <Constant text="({0:n0}; " />
+                      <VectorOp op="x" style="vec-op-1">
+                        <CraftProperty property="Target.Position" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0}; " />
+                      <VectorOp op="y" style="vec-op-1">
+                        <CraftProperty property="Target.Position" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0})" />
+                      <VectorOp op="z" style="vec-op-1">
+                        <CraftProperty property="Target.Position" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <DisplayMessage id="73" style="display">
+                <StringOp op="join" style="join">
+                  <Constant text="Pitch Vector: " />
+                  <StringOp op="join" style="join">
+                    <StringOp op="format" style="format">
+                      <Constant text="({0:n0}; " />
+                      <VectorOp op="x" style="vec-op-1">
+                        <CraftProperty property="Nav.CraftRight" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0}; " />
+                      <VectorOp op="y" style="vec-op-1">
+                        <CraftProperty property="Nav.CraftRight" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <StringOp op="format" style="format">
+                      <Constant text="{0:n0})" />
+                      <VectorOp op="z" style="vec-op-1">
+                        <CraftProperty property="Nav.CraftRight" style="prop-nav" />
+                      </VectorOp>
+                      <Constant text="" />
+                    </StringOp>
+                    <Constant text="" />
+                  </StringOp>
+                  <Constant text="" />
+                </StringOp>
+                <Constant number="7" />
+              </DisplayMessage>
+              <SetVariable id="74" style="set-variable">
+                <Variable list="false" local="false" variableName="log_cross_product" />
+                <VectorOp op="cross" style="vec-op-2">
+                  <CraftProperty property="Nav.Position" style="prop-nav" />
+                  <CraftProperty property="Vel.OrbitVelocity" style="prop-velocity" />
+                </VectorOp>
+              </SetVariable>
+              <SetVariable id="75" style="set-variable">
+                <Variable list="false" local="false" variableName="log_RcrossVnorm_y" />
+                <VectorOp op="y" style="vec-op-1">
+                  <Variable list="false" local="false" variableName="RcrossVnorm" />
+                </VectorOp>
+              </SetVariable>
+              <SetVariable id="76" style="set-variable">
+                <Variable list="false" local="false" variableName="log_RcrossVnorm_x" />
+                <VectorOp op="x" style="vec-op-1">
+                  <Variable list="false" local="false" variableName="RcrossVnorm" />
+                </VectorOp>
+              </SetVariable>
+              <SetVariable id="77" style="set-variable">
+                <Variable list="false" local="false" variableName="log_target_position" />
+                <CraftProperty property="Target.Position" style="prop-nav" />
+              </SetVariable>
+              <Comment id="78" style="comment">
+                <Constant style="comment-text" canReplace="false" text="distance to target (surface) | x coordinate is the altitude of the craft" />
+              </Comment>
+            </Instructions>
+            <Expressions>
+              <Constant pos="680.8155,-1240.711" text="{0:n0})" />
+              <MathFunction function="sqrt" style="op-math" pos="2954.217,-614.8072">
+                <BinaryOp op="+" style="op-add">
+                  <BinaryOp op="^" style="op-exp">
+                    <Variable list="false" local="false" variableName="east_mag" />
+                    <Constant text="2" />
+                  </BinaryOp>
+                  <BinaryOp op="^" style="op-exp">
+                    <Variable list="false" local="false" variableName="up_mag" />
+                    <Constant text="2" />
+                  </BinaryOp>
+                </BinaryOp>
+              </MathFunction>
+              <StringOp op="format" style="format" pos="4134.532,-759.1651">
+                <Constant text="R cross V norm X: {0:n1}" />
+                <VectorOp op="x" style="vec-op-1">
+                  <Variable list="false" local="false" variableName="RcrossVnorm" />
+                </VectorOp>
+                <Constant text="" />
+              </StringOp>
+              <StringOp op="format" style="format" pos="4136.704,-680.2634">
+                <Constant text="R cross V norm Y: {0:n1}" />
+                <VectorOp op="y" style="vec-op-1">
+                  <Variable list="false" local="false" variableName="RcrossVnorm" />
+                </VectorOp>
+                <Constant text="" />
+              </StringOp>
+              <CustomExpression callFormat="get target vector y" format="get target vector y return (0)" name="get target vector y" style="custom-expression" pos="741.1574,-562.3198">
+                <BinaryOp op="-" style="op-sub">
+                  <VectorOp op="y" style="vec-op-1">
+                    <CraftProperty property="Target.Position" style="prop-nav" />
+                  </VectorOp>
+                  <VectorOp op="y" style="vec-op-1">
+                    <CraftProperty property="Nav.Position" style="prop-nav" />
+                  </VectorOp>
+                </BinaryOp>
+              </CustomExpression>
+              <CustomExpression callFormat="get target vector z" format="get target vector z return (0)" name="get target vector z" style="custom-expression" pos="738.6701,-627.293">
+                <BinaryOp op="-" style="op-sub">
+                  <VectorOp op="z" style="vec-op-1">
+                    <CraftProperty property="Target.Position" style="prop-nav" />
+                  </VectorOp>
+                  <VectorOp op="z" style="vec-op-1">
+                    <CraftProperty property="Nav.Position" style="prop-nav" />
+                  </VectorOp>
+                </BinaryOp>
+              </CustomExpression>
+              <CustomExpression callFormat="get target vector x" format="get target vector x return (0)" name="get target vector x" style="custom-expression" pos="740.5888,-499.6102">
+                <BinaryOp op="-" style="op-sub">
+                  <VectorOp op="x" style="vec-op-1">
+                    <CraftProperty property="Target.Position" style="prop-nav" />
+                  </VectorOp>
+                  <VectorOp op="x" style="vec-op-1">
+                    <CraftProperty property="Nav.Position" style="prop-nav" />
+                  </VectorOp>
+                </BinaryOp>
+              </CustomExpression>
+            </Expressions>
+          </Program>
+        </FlightProgram>
+        <SR2Logger.VariableLogger host="localhost" port="2873" staticPriceAndMass="false" version="1" versionLast="1" />
+      </Part>
+      <Part id="118" partType="Fin1" position="-4.329794E-05,0.1500611,-0.3716451" rotation="1.711369E-05,-2.390566E-05,3.073584E-05" commandPodId="88" materials="0,1,0,0,1" mirrored="true">
+        <Drag drag="0,0,2.156607E-06,0,0.01111902,0.01111917" area="0,0,0.0001269081,0,0.01114013,0.01114013" />
+        <Config centerOfMass="4.565237E-12,0.1102067,-0.009999978" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" symmetryId="7910a606-3c31-465e-97f5-61b982337e90" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.15" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.01111111" leadingBulgeStyle="0.6" tipLeadingOffset="0.2" tipPosition="0,0.25,-0.15" tipTrailingOffset="-0" symmetryId="7a5d13a3-ba92-47d0-995b-9c1a6d6dfbf7" version="2" />
+        <ControlSurface end="1" input="Roll" symmetryId="4879d471-7a64-4cac-bc0f-cca5c7fe39a7" />
+      </Part>
+      <Part id="119" partType="Fin1" position="4.316761E-05,-0.1500622,-0.3716452" rotation="1.703726E-05,-2.390566E-05,180" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0,0,0,1.459857E-05,0.01111916,0.01111902" area="0,0,0,0.0004230268,0.01114013,0.01114013" />
+        <Config centerOfMass="7.782663E-13,0.1102067,-0.009999988" heatShieldScale="0" massScale="0.05" partScale="0.4,0.4,0.4" symmetryId="7910a606-3c31-465e-97f5-61b982337e90" />
+        <Wing airfoil="Fin" controlSurfacePriceMultiplier="1.08" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.15" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.01111111" leadingBulgeStyle="0.6" tipLeadingOffset="0.2" tipPosition="0,0.25,-0.15" tipTrailingOffset="-0" symmetryId="7a5d13a3-ba92-47d0-995b-9c1a6d6dfbf7" version="2" />
+        <ControlSurface end="1" input="Roll" symmetryId="4879d471-7a64-4cac-bc0f-cca5c7fe39a7" />
+      </Part>
+      <Part id="122" partType="Fin1" position="-6.042761E-07,0.1500179,0.07835485" rotation="1.555146E-05,2.492398E-05,0.0001274195" commandPodId="88" materials="0,1,0,0,1" mirrored="true">
+        <Drag drag="0.0002972803,2.654286E-06,0.002115134,0,0.06865808,0.0686598" area="0.003384217,8.460537E-05,0.002115134,0,0.06873449,0.06873449" />
+        <Config centerOfMass="-1.311771E-13,0.2009981,0.007499998" heatShieldScale="0" massScale="0.1" partScale="0.65,0.65,0.65" symmetryId="90fb725f-4d11-4539-86a1-5d9909a998f9" />
+        <Wing airfoil="Fin" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.2" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.020487804" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.4,-0.2" tipTrailingOffset="-0" symmetryId="0049d017-e7d4-4c41-aa4c-5c15b45a8920" version="2" />
+      </Part>
+      <Part id="123" partType="Fin1" position="9.843078E-08,-0.1500193,0.07835476" rotation="1.859949E-05,-7.27353E-05,180.0001" commandPodId="88" materials="0,1,0,0,1">
+        <Drag drag="0.0002974462,2.654286E-06,0,0.002115134,0.06865983,0.06865807" area="0.003384217,8.460537E-05,0,0.002115134,0.06873449,0.06873449" />
+        <Config centerOfMass="0,0.2009981,0.007499992" heatShieldScale="0" massScale="0.1" partScale="0.65,0.65,0.65" symmetryId="90fb725f-4d11-4539-86a1-5d9909a998f9" />
+        <Wing airfoil="Fin" curveLength="0.3" isFancy="true" isStylish="true" rootLeadingOffset="0.21" rootTrailingOffset="0.2" thickness="0.02" thicknessDeltaStyle="0.1" thicknessOffsetStyle="0" thicknessTipAuto="0.020487804" leadingBulgeStyle="0.6" tipLeadingOffset="0.42" tipPosition="0,0.4,-0.2" tipTrailingOffset="-0" symmetryId="0049d017-e7d4-4c41-aa4c-5c15b45a8920" version="2" />
+      </Part>
+    </Parts>
+    <Connections>
+      <Connection partA="102" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="dc9f1811-3192-4b06-af8c-ce24b7f7ffac" />
+      <Connection partA="113" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="ff27b7aa-ef4d-48f8-97e7-bb87d348091b" />
+      <Connection partA="88" partB="78" attachPointsA="1,4" attachPointsB="2,4" />
+      <Connection partA="105" partB="88" attachPointsA="1,2" attachPointsB="2,3" />
+      <Connection partA="115" partB="78" attachPointsA="0" attachPointsB="0" />
+      <Connection partA="109" partB="78" attachPointsA="1" attachPointsB="0" />
+      <Connection partA="114" partB="78" attachPointsA="1" attachPointsB="0" />
+      <Connection partA="93" partB="78" attachPointsA="1" attachPointsB="0" />
+      <Connection partA="112" partB="78" attachPointsA="1" attachPointsB="0" />
+      <Connection partA="118" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="ab8a9ea4-2cb3-4a66-9c20-b90954c354a3" />
+      <Connection partA="119" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="ab8a9ea4-2cb3-4a66-9c20-b90954c354a3" />
+      <Connection partA="122" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="e8cf20d5-c75f-4982-a764-bf2b84ad7ca2" />
+      <Connection partA="123" partB="78" attachPointsA="1" attachPointsB="0" symmetryId="e8cf20d5-c75f-4982-a764-bf2b84ad7ca2" />
+    </Connections>
+    <Collisions />
+    <Bodies>
+      <Body id="1" partIds="78,102,113,88,115,109,114,93,112,118,119,122,123,105" mass="0.101901129" position="1.361437E-09,-1.299519E-08,0.0001082495" rotation="0,0,0" centerOfMass="0,0,0" />
+    </Bodies>
+  </Assembly>
+  <DesignerSettings themeName="Custom">
+    <Theme name="Custom" id="42366a36-e4e4-42b1-831b-af0c4b1b061f">
+      <Material name="" color="FFFFFF" m="0.1" s="1" d="0" />
+      <Material name="" color="0040FF" m="-0" s="0.3" />
+      <Material name="" color="CBCDCE" m="0.85" s="0.8" />
+      <Material name="" color="76736F" m="0.85" s="0.5" />
+      <Material name="" color="000000" m="0.85" s="-0" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.6" s="1" />
+      <Material name="" color="F3F3F3" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="8000FF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="-0" s="-0" d="0.2" />
+      <Material name="" color="178BFF" m="-0" s="-0" d="0.1" />
+      <Material name="" color="CBCDCE" m="0.85" s="0.3" d="0.5" />
+      <Material name="" color="76736F" m="0.85" s="0.3" d="0.5" />
+      <Material name="" color="000000" m="0.85" s="1" />
+      <Material name="" color="000046" m="0.85" s="0.5" d="0.1" />
+      <Material name="" color="FFEEB9" m="-0" s="1" />
+      <Material name="" color="000000" m="0.85" s="-0" />
+      <Material name="" color="FFFFFF" m="1" s="0.81" d="2.5" t="0.38" />
+      <Material name="" color="808080" m="1" s="-0" t="0.9" />
+    </Theme>
+  </DesignerSettings>
+  <Themes>
+    <Theme name="Custom" id="0b31155e-d830-48de-aed8-93565ed55e66">
+      <Material name="" color="FFFFFF" m="0.1" s="1" d="0" />
+      <Material name="" color="0040FF" m="-0" s="0.3" />
+      <Material name="" color="CBCDCE" m="0.85" s="0.8" />
+      <Material name="" color="76736F" m="0.85" s="0.5" />
+      <Material name="" color="000000" m="0.85" s="-0" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.6" s="1" />
+      <Material name="" color="F3F3F3" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="8000FF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="0.1" s="0.08" />
+      <Material name="" color="FFFFFF" m="-0" s="-0" d="0.2" />
+      <Material name="" color="178BFF" m="-0" s="-0" d="0.1" />
+      <Material name="" color="CBCDCE" m="0.85" s="0.3" d="0.5" />
+      <Material name="" color="76736F" m="0.85" s="0.3" d="0.5" />
+      <Material name="" color="000000" m="0.85" s="1" />
+      <Material name="" color="000046" m="0.85" s="0.5" d="0.1" />
+      <Material name="" color="FFEEB9" m="-0" s="1" />
+      <Material name="" color="000000" m="0.85" s="-0" />
+      <Material name="" color="FFFFFF" m="1" s="0.81" d="2.5" t="0.38" />
+      <Material name="" color="808080" m="1" s="-0" t="0.9" />
+    </Theme>
+  </Themes>
+  <RequiredMods>
+    <RequiredMod name="SR2Logger" author="WNP78" version="1.0" lastModified="2020-02-23T12:00:50Z" requiresCodeExecution="true" />
+  </RequiredMods>
+  <Symmetry />
+</Craft>
